@@ -4,11 +4,11 @@ import "./Row.css";
 import YouTube from "react-youtube";
 import requests from "./requests";
 
-const base_url = "https://image.tmdb.org/t/p/original/";
-
 function Row({ title, fetchUrl, isLargeRow }) {
   const [movies, setMovies] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
+
+  const base_url = "https://image.tmdb.org/t/p/original/";
 
   // A snippet of code which runs based on a specific condition/variable
   useEffect(() => {
