@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import logo from "./assets/images/flixer_logo.png";
+import logo from "../assets/images/flixer_logo.png";
 import "./Nav.css";
 
 function Nav() {

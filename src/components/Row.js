@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "./axios";
+import axios from "../axios";
 import "./Row.css";
 import YouTube from "react-youtube";
-import requests from "./requests";
+import requests from "../requests";
 
 function Row({ title, fetchUrl, isLargeRow }) {
   const [movies, setMovies] = useState([]);
