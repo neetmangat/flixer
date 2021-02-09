@@ -3,21 +3,31 @@ import HomeScreen from "./screens/HomeScreen";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import LoginScreen from "./screens/LoginScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 import { auth } from "./firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, login, selectUser } from "./features/userSlice";
 
 function App() {
-  const user = null;
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    auth.onAuthStateChanged((userAuth) => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
       if (userAuth) {
-        // Logged in
-        console.log(userAuth);
+        dispatch(
+          login({
+            uid: userAuth.uid,
+            email: userAuth.email,
+          })
+        );
       } else {
-        // Logged out
+        dispatch(logout());
       }
     });
-  }, []);
+
+    return unsubscribe;
+  }, [dispatch]);
 
   return (
     <div className="app">
@@ -26,6 +36,9 @@ function App() {
           <LoginScreen />
         ) : (
           <Switch>
+            <Route path="/profile">
+              <ProfileScreen />
+            </Route>
             <Route exact path="/">
               <HomeScreen />
             </Route>
